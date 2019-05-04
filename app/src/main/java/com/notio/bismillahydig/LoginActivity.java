@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private CallbackManager callbackManager;
     private LoginButton loginButtonFacebook;
-    private String ID,NAMA,EMAIL,JENKEL,ULTAH,LINK,LOKASI;
+    private String ID,NAMA,EMAIL,JENKEL,ULTAH,LINK,LOKASI, SUMBERLOGIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                                     ULTAH = object.getString("birthday");
                                     LINK = object.getString("link");
                                     LOKASI = jsonObject.getString("name");
+                                    SUMBERLOGIN = "facebook";
                                     simpanKeServer();
                                 } catch (JSONException e) {
                                     Log.e(TAG, "onCompleted: onSuccess: loginButtonFacebook: " + e);
@@ -121,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
         listDataPengguna.add(ULTAH);
         listDataPengguna.add(LINK);
         listDataPengguna.add(LOKASI);
+        listDataPengguna.add(SUMBERLOGIN);
         ServerYDIG serverYDIG = new ServerYDIG(this,"LoginData");
         synchronized (this){
             serverYDIG.sendArrayList(listDataPengguna);

@@ -29,6 +29,7 @@ public class ServerYDIG {
     }
 
     public void sendArrayList(final List<String> list) {
+        Log.e(TAG, "sendArrayList: "+ list);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, alamatServer(),
                 new Response.Listener<String>() {
                     @Override
@@ -50,7 +51,7 @@ public class ServerYDIG {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e(TAG, "onErrorResponse: "+ error);
                     }
                 }){
             @Override
