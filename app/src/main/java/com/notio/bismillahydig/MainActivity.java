@@ -60,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
             Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         }
 
-        int dimensionPixelSize = getResources().getDimensionPixelSize(com.facebook.R.dimen.com_facebook_profilepictureview_preset_size_large);
-        Uri profilePictureUri = ImageRequest.getProfilePictureUri(ID_LOGIN, dimensionPixelSize , dimensionPixelSize );
-        Glide.with(this).load(profilePictureUri).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(imageView);
+        if (SUMBER_LOGIN.equals("facebook")){
+            int dimensionPixelSize = getResources().getDimensionPixelSize(com.facebook.R.dimen.com_facebook_profilepictureview_preset_size_large);
+            Uri profilePictureUri = ImageRequest.getProfilePictureUri(ID_LOGIN, dimensionPixelSize , dimensionPixelSize );
+            Glide.with(this).load(profilePictureUri).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(imageView);
+        }
     }
 
     @Override

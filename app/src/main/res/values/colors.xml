@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#335973</color>
-    <color name="colorPrimaryDark">#182336</color>
-    <color name="colorAccent">#BDC000</color>
-    <color name="bodas">#ffffff</color>
-    <color name="hejotaikuda">#BDB733</color>
-    <color name="stroke">#EFF0F1</color>
-    <color name="merah">#b71c1c</color>
-    <color name="hideung">#000000</color>
-    <color name="hejo">#008400</color>
-    <color name="abuabu">#484848</color>
-    <color name="abuabu2">#b7b7b7</color>
-    <color name="abungora">#e4e4e4</color>
-    <color name="hejoleho">#a49f27</color>
-    <color name="birujadwal">#617588</color>
-    <color name="birujadwal2">#192538</color>
-    <color name="biruwa">#9de1fe</color>
+    <color name="colorPrimary">#011970</color>
+    <color name="colorPrimaryDark">#122952</color>
+    <color name="colorAccent">#1230A2</color>
+    <color name="putihKotor">#EFF0F1</color>
+    <color name="orangeTulisan">#E9AB00</color>
+    <color name="grey">#E9EBEE</color>
+    <color name="darkGrey">#4B4F56</color>
+    <color name="black">#000</color>
 </resources>
