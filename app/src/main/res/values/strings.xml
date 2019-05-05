@@ -2,4 +2,5 @@
     <string name="app_name">YDIG</string>
     <string name="facebook_app_id">421228271788094</string>
     <string name="fb_login_protocol_scheme">fb421228271788094</string>
+    <string name="keluar">Keluar</string>
 </resources>

@@ -10,12 +10,16 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.notio.bismillahydig.database.DBLocalHandler;
 import com.notio.bismillahydig.database.ServerYDIG;
+import com.notio.bismillahydig.models.ModelUser;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -30,13 +34,15 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private CallbackManager callbackManager;
     private LoginButton loginButtonFacebook;
-    private String ID,NAMA,EMAIL,JENKEL,ULTAH,LINK,LOKASI, SUMBERLOGIN;
+    private String ID,NAMA,EMAIL,JENKEL,ULTAH,LINK,LOKASI, SUMBERLOGIN, PASSWORD;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        progressBar = findViewById(R.id.login_progressBar);
         loginButtonFacebook = findViewById(R.id.login_button_facebook);
 
         loginDenganFacebook();
@@ -57,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         //
         //      }
         //  };
+
         loginButtonFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -67,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
+                                progressBar.setVisibility(View.VISIBLE);
                                 // Log.e(TAG, "onCompleted: onSuccess: loginButtonFacebook: " + response.toString());
                                 try {
                                     JSONObject jsonObject = object.getJSONObject("location");
@@ -86,7 +94,9 @@ public class LoginActivity extends AppCompatActivity {
                                     LINK = object.getString("link");
                                     LOKASI = jsonObject.getString("name");
                                     SUMBERLOGIN = "facebook";
+                                    PASSWORD = "";
                                     simpanKeServer();
+
                                 } catch (JSONException e) {
                                     Log.e(TAG, "onCompleted: onSuccess: loginButtonFacebook: " + e);
                                     e.printStackTrace();
@@ -102,13 +112,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCancel() {
                 Log.e(TAG, "onCancel: loginButtonFacebook: ");
-                Toast.makeText(getApplicationContext(), "Anda membatalkan lgoin dengan Faceboook", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Anda membatalkan masuk dengan Faceboook", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onError(FacebookException error) {
                 Log.e(TAG, "onError: loginButtonFacebook: " + error);
                 Toast.makeText(getApplicationContext(), (CharSequence) error, Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -127,6 +139,24 @@ public class LoginActivity extends AppCompatActivity {
         synchronized (this){
             serverYDIG.sendArrayList(listDataPengguna);
         }
+        simpanKeBDLocal(ID, SUMBERLOGIN, PASSWORD);
+    }
+
+    private void simpanKeBDLocal(String id, String sumberlogin, String password) {
+        DBLocalHandler dbLocalHandler = new DBLocalHandler(this);
+        dbLocalHandler.addUser(
+                new ModelUser(1, sumberlogin, id, password)
+        );
+        dbLocalHandler.close();
+        progressBar.setVisibility(View.GONE);
+        kirimPenggunakeMainActivity();
+    }
+
+    private void kirimPenggunakeMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override
