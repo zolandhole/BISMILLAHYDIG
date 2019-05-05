@@ -73,6 +73,14 @@ public class DBLocalHandler extends SQLiteOpenHelper {
             user.put("password", cursor.getString(cursor.getColumnIndex(KEY_PASSWORD)));
             userList.add(user);
         }
+        db.close();
         return userList;
+    }
+
+    public void deleteDB() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_USER, null, null);
+        db.execSQL("DELETE FROM " + TABLE_USER);
+        db.close();
     }
 }

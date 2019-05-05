@@ -15,8 +15,13 @@ import com.notio.bismillahydig.database.ServerYDIG;
 import com.notio.bismillahydig.models.ModelUser;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -25,6 +30,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +56,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginDenganFacebook() {
+        try {
+            @SuppressLint("PackageManagerGetSignatures") PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.notio.bismillahydig", PackageManager.GET_SIGNATURES
+            );
+            for (Signature signature: info.signatures){
+                MessageDigest messageDigest = MessageDigest.getInstance("SHA");
+                messageDigest.update(signature.toByteArray());
+                Log.e(TAG, "loginDenganFacebook: " + Base64.encodeToString(messageDigest.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e){
+            Log.e(TAG, "loginDenganFacebook: " + e);
+        } catch (NoSuchAlgorithmException e){
+            Log.e(TAG, "loginDenganFacebook: " + e);
+        }
+        
         callbackManager = CallbackManager.Factory.create();
         loginButtonFacebook.setReadPermissions(Arrays.asList("email","public_profile","user_gender","user_birthday","user_link","user_location"));
         // AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {

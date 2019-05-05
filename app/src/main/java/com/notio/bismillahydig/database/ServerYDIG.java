@@ -68,8 +68,9 @@ public class ServerYDIG {
 
     private String alamatServer() {
         String url = "";
-        if ("LoginData".equals(aktifitas)) {
-            url = alamatURL.POST_LOGIN;
+        switch (aktifitas){
+            case "LoginData": url = alamatURL.POST_LOGIN; break;
+            case "logout": url = alamatURL.POST_LOGOUT; break;
         }
         return url;
     }
