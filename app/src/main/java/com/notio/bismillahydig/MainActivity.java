@@ -59,12 +59,16 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         }
-
-        if (SUMBER_LOGIN.equals("facebook")){
-            int dimensionPixelSize = getResources().getDimensionPixelSize(com.facebook.R.dimen.com_facebook_profilepictureview_preset_size_large);
-            Uri profilePictureUri = ImageRequest.getProfilePictureUri(ID_LOGIN, dimensionPixelSize , dimensionPixelSize );
-            Glide.with(this).load(profilePictureUri).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(imageView);
+        if (SUMBER_LOGIN != null){
+            if (SUMBER_LOGIN.equals("facebook")){
+                int dimensionPixelSize = getResources().getDimensionPixelSize(com.facebook.R.dimen.com_facebook_profilepictureview_preset_size_large);
+                Uri profilePictureUri = ImageRequest.getProfilePictureUri(ID_LOGIN, dimensionPixelSize , dimensionPixelSize );
+                Glide.with(this).load(profilePictureUri).diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(imageView);
+            }
+        } else {
+            kirimPenggunaKeHalamanLogin();
         }
+
     }
 
     @Override
@@ -92,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             if (SUMBER_LOGIN.equals("facebook")){
                 if (ID_LOGIN == null){
-                    progressBar.setVisibility(View.GONE);
                     kirimPenggunaKeHalamanLogin();
                 } else {
                     Toast.makeText(this, "SELAMAT ANDA SUDAH BISA LOGIN DENGAN FACEBOOK", Toast.LENGTH_SHORT).show();
@@ -124,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void kirimPenggunaKeHalamanLogin() {
+        progressBar.setVisibility(View.GONE);
         dbLocalHandler.deleteDB();
         LoginManager.getInstance().logOut();
         ServerYDIG serverYDIG = new ServerYDIG(this,"logout");
