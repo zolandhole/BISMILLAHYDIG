@@ -1,4 +1,4 @@
-package com.notio.bismillahydig;
+package com.notio.ydig;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +10,9 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.notio.bismillahydig.database.DBLocalHandler;
-import com.notio.bismillahydig.database.ServerYDIG;
-import com.notio.bismillahydig.models.ModelUser;
+import com.notio.ydig.database.DBLocalHandler;
+import com.notio.ydig.database.ServerYDIG;
+import com.notio.ydig.models.ModelUser;
 
 
 import android.annotation.SuppressLint;

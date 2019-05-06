@@ -1,4 +1,4 @@
-package com.notio.bismillahydig;
+package com.notio.ydig;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,8 +21,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.internal.ImageRequest;
 import com.facebook.login.LoginManager;
-import com.notio.bismillahydig.database.DBLocalHandler;
-import com.notio.bismillahydig.database.ServerYDIG;
+import com.notio.ydig.database.DBLocalHandler;
+import com.notio.ydig.database.ServerYDIG;
 
 import java.util.ArrayList;
 import java.util.HashMap;

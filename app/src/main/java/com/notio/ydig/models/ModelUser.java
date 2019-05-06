@@ -1,4 +1,4 @@
-package com.notio.bismillahydig.models;
+package com.notio.ydig.models;
 
 public class ModelUser {
     private int id;

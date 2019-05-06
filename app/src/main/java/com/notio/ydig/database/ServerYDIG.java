@@ -1,4 +1,4 @@
-package com.notio.bismillahydig.database;
+package com.notio.ydig.database;
 
 import android.content.Context;
 import android.util.Log;

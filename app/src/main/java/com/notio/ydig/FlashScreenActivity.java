@@ -1,4 +1,4 @@
-package com.notio.bismillahydig;
+package com.notio.ydig;
 
 import androidx.appcompat.app.AppCompatActivity;
 

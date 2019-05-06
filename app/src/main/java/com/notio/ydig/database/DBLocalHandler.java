@@ -1,4 +1,4 @@
-package com.notio.bismillahydig.database;
+package com.notio.ydig.database;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.notio.bismillahydig.models.ModelUser;
+import com.notio.ydig.models.ModelUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
